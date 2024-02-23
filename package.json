@@ -1,28 +1,47 @@
 {
   "name": "next13-api-decorators",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "Build Next.js 13 API like Nest",
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "scripts": {
-    "build": "tsup ./src/index.ts"
+  "tsup": {
+    "entry": [
+      "src/index.ts"
+    ],
+    "dts": true,
+    "splitting": false,
+    "sourcemap": true,
+    "clean": true
   },
-  "author": "",
+  "scripts": {
+    "build": "tsup"
+  },
+  "author": "Liberatos278",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liberatos278/next13-api-decorators"
+  },
+  "keywords": [
+    "next.js",
+    "next",
+    "api",
+    "decorators",
+    "nest"
+  ],
   "license": "MIT",
   "dependencies": {
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "next": "^14.1.0",
-    "path": "^0.12.7",
     "path-to-regexp": "^6.2.1",
     "reflect-metadata": "^0.2.1"
   },
   "devDependencies": {
     "tsup": "^8.0.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "@types/node": "^20.11.20"
   }
 }

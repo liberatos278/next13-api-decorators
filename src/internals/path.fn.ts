@@ -1,10 +1,26 @@
 // Get the directory name of the current module to create URL path for controller
 export function GetBasePath() {
-  const dir = __dirname.split("/")
-  const index = dir.indexOf("app")
+  let errorStack = new Error().stack
 
-  if (index === -1) throw new Error("No app directory found")
-  return "/" + dir.slice(index + 1).join("/")
+  if (errorStack && process.platform === "win32") {
+    errorStack = errorStack.replace(/\\/g, "/")
+  }
+
+  if (!errorStack) throw new Error("Cannot utilize controller")
+
+  const errorLine = errorStack
+    .split("\n")
+    .find((line) => line.includes("/app/"))
+
+  if (!errorLine) throw new Error("Cannot utilize controller")
+
+  const fileInfo = errorLine
+    .match(/\/app\/(.*?)(?=\/route\.ts)/)?.[0]
+    .replace("/app", "")
+
+  if (!fileInfo) throw new Error("Cannot utilize controller")
+
+  return fileInfo
 }
 
 // Format path to be used in routing and for path-to-regexp
