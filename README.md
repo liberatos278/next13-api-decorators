@@ -51,6 +51,8 @@ class UserController extends ApiRouteHandler {
     db.user.delete(userId)
   }
 }
+
+export const { GET, POST, DELETE } = UserController.build()
 ```
 
 ## Authors

@@ -1,6 +1,6 @@
 {
   "name": "next13-api-decorators",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Build Next.js 13 API like Nest",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
