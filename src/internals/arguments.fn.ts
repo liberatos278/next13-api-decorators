@@ -99,14 +99,13 @@ export async function GenerateArgs(
     const paramType = paramTypes[arg.index]
     const { key, pipes } = arg
 
-    let returnValue = newArgs[arg.index]
     if (pipes && pipes.length) {
       for (const pipeFn of pipes) {
-        returnValue = pipeFn.name
+        newArgs[arg.index] = pipeFn.name
           ? await pipeFn
               .call(null, null)
-              .call(null, returnValue, { key, metaType: paramType })
-          : await pipeFn.call(null, returnValue, {
+              .call(null, newArgs[arg.index], { key, metaType: paramType })
+          : await pipeFn.call(null, newArgs[arg.index], {
               name: key,
               metaType: paramType,
             })
