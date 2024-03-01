@@ -6,19 +6,17 @@ export function GetBasePath() {
     errorStack = errorStack.replace(/\\/g, "/")
   }
 
-  if (!errorStack) return ''
+  if (!errorStack) throw "Cannot utilize controller"
 
   const errorLine = errorStack
     .split("\n")
     .find((line) => line.includes("/app/"))
 
-  if (!errorLine) return ''
+  if (!errorLine) throw "Cannot utilize controller"
 
-  const fileInfo = errorLine
-    .match(/\/app\/(.*?)(?=\/route\.ts)/)?.[0]
-    .replace("/app", "")
+  const fileInfo = errorLine.match(/\/app(.*?)(?=\/route\.ts|\/route\.js)/)?.[1]
 
-  if (!fileInfo) return ''
+  if (!fileInfo) throw "Cannot utilize controller"
 
   return fileInfo
 }
